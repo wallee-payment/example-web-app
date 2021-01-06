@@ -1,0 +1,5 @@
+{
+    "require": {
+        "wallee/sdk": "2.1.6"
+    }
+}
