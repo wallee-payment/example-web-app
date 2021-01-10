@@ -1,10 +1,6 @@
 <?php
-/**
- * Copyright wallee AG
- */
 
 require_once 'common.php';
-
 
 if (!isset($_GET['space_id'])) {
 	throw new Exception("The 'space_id' parameter is missing.");
@@ -16,7 +12,7 @@ $currentUrl = url();
 $parameters = array();
 $parameters['redirect_uri'] = str_replace("install.php", "confirm.php", $currentUrl);
 $parameters['space_id'] = $_GET['space_id'];
-$parameters['scope'] = "1432203188128"; // This permission allows to update the space.
+$parameters['scope'] = "1432203188128 1437384235174 1452535301811 1451720762328"; // This permission allows to update the space.
 $parameters['state'] = time();
 $parameters['client_id'] = config()->client_id;
 

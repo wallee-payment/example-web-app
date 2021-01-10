@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/vendor/autoload.php');
+
 
 function exception_handler($exception) {
 	echo '<pre>';
@@ -79,4 +81,39 @@ function url()
     $segments = explode('?', $uri, 2);
     $url = $segments[0];
     return $url;
+}
+
+
+function checkHmac($requestParameters, $hmac) {
+	if (calculateHmac($requestParameters) != $hmac) {
+		throw new Exception("The HMAC does not match.");
+	}
+}
+
+function calculateHmac($requestParameters) {
+
+
+	// We sort the array elements by the element's key
+	ksort($requestParameters);
+
+
+	$parametersToSecure = array();
+
+	foreach ($requestParameters as $key => $value) {
+		$parametersToSecure[] = $key . "=" . $value;
+	}
+
+	$toSecure = implode('|', $parametersToSecure);
+
+	$decodedSecret = base64_decode(config()->client_secret);
+	$hmacValue = base64_encode(hash_hmac("sha512", $toSecure, $decodedSecret, true));
+
+	// Replacing "+" with "-" and "/" with "_"
+	$cleanedMac = $url = strtr($hmacValue, '+/', '-_');
+
+	// Remove padding
+	$cleanedMac = rtrim($cleanedMac, '=');
+
+	return $cleanedMac;
+
 }
