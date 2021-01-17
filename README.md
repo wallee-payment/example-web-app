@@ -20,4 +20,5 @@ To run the container please use the command:
 docker run -p 3000:80 -e APP_ENDPOINT=https://app-wallee.com -e APP_CLIENT_ID=5 -e APP_CLIENT_SECRET=7YdQ7vc0C2wQvbVyfsIZ3bub62ZJEjF6ACYpuTd0U94= example-web-app
 ```
 
-Adapt the values for `APP_CLIENT_ID` and `APP_CLIENT_SECRET` according to the configuration of the web app.
+Adapt the values for `APP_CLIENT_ID` and `APP_CLIENT_SECRET` according to the configuration of the web app. In the web app configuration
+you can set the installation redirection `http://localhost:3000/install.php` and for the allowed endpoints you should add `http://localhost:3000`.
