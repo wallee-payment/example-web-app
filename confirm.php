@@ -40,7 +40,7 @@ if ($response->getStatusCode() == 200) {
 
 	$webhookUrl = new WebhookUrl();
 	$webhookUrl->setName("Test");
-	$webhookUrl->setUrl(str_replace("confirm.php", "notify.php", $currentUrl));
+	$webhookUrl->setUrl("http://requestbin.net/r/1460p281");
 	$webhookUrlPersisted = $client->getWebhookUrlService()->create($response->getData()->space->id, $webhookUrl);
 	
 	$webhookUrlReload = $client->getWebhookUrlService()->read($response->getData()->space->id, $webhookUrlPersisted->getId());
